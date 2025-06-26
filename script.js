@@ -3,6 +3,33 @@ document.addEventListener('DOMContentLoaded', function() {
     const stickyNav = document.getElementById('sticky-nav');
     const heroSection = document.querySelector('.hero');
     const navLinks = document.querySelectorAll('.nav-link');
+    const mobileMenuToggle = document.getElementById('mobile-menu-toggle');
+    const mobileMenu = document.getElementById('mobile-menu');
+    const mobileNavLinks = document.querySelectorAll('.mobile-nav-link');
+    
+    // Mobile menu toggle
+    if (mobileMenuToggle && mobileMenu) {
+        mobileMenuToggle.addEventListener('click', function() {
+            mobileMenuToggle.classList.toggle('active');
+            mobileMenu.classList.toggle('active');
+        });
+        
+        // Close mobile menu when clicking on a link
+        mobileNavLinks.forEach(link => {
+            link.addEventListener('click', function() {
+                mobileMenuToggle.classList.remove('active');
+                mobileMenu.classList.remove('active');
+            });
+        });
+        
+        // Close mobile menu when clicking outside
+        document.addEventListener('click', function(e) {
+            if (!stickyNav.contains(e.target)) {
+                mobileMenuToggle.classList.remove('active');
+                mobileMenu.classList.remove('active');
+            }
+        });
+    }
     
     // Show/hide sticky navigation based on scroll
     window.addEventListener('scroll', function() {
@@ -48,13 +75,19 @@ document.addEventListener('DOMContentLoaded', function() {
             const sectionHeight = section.offsetHeight;
             const sectionId = section.getAttribute('id');
             const navLink = document.querySelector(`.nav-link[href="#${sectionId}"]`);
+            const mobileNavLink = document.querySelector(`.mobile-nav-link[href="#${sectionId}"]`);
             
             if (scrollPos >= sectionTop && scrollPos < sectionTop + sectionHeight) {
                 // Remove active class from all nav links
                 navLinks.forEach(link => link.classList.remove('active'));
-                // Add active class to current nav link
+                mobileNavLinks.forEach(link => link.classList.remove('active'));
+                
+                // Add active class to current nav links
                 if (navLink) {
                     navLink.classList.add('active');
+                }
+                if (mobileNavLink) {
+                    mobileNavLink.classList.add('active');
                 }
             }
         });
