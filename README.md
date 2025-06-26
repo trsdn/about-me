@@ -15,7 +15,6 @@ A modern, responsive personal website built for GitHub Pages, showcasing profess
 - **SEO Friendly**: Proper meta tags and semantic HTML
 - **GitHub Pages Ready**: Deployment ready configuration
 
-
 ## 📁 File Structure
 
 ```
@@ -30,17 +29,20 @@ about-me/
 ## 🎨 Customization Guide
 
 ### Personal Information
+
 - **Name & Title**: Update the hero section in `index.html`
 - **About Section**: Replace with your own professional bio
 - **Profile Photo**: Replace `torstenmahr.jpeg` with your image
 
 ### Professional Content
+
 - **Experience**: Update the experience section with your roles
 - **Publications**: Add your research papers and publications
 - **Case Studies**: Replace with your major project achievements
 - **Projects**: Add your personal and professional projects
 
 ### Visual Customization
+
 - **Colors**: Modify the gradient variables in `styles.css`
 - **Layout**: Adjust grid layouts and spacing
 - **Animations**: Customize transition effects and hover states
