@@ -282,6 +282,78 @@ p {
     line-height: 1.6;
 }
 
+/* Education Section */
+.education-section {
+    margin-bottom: 60px;
+}
+
+.education-grid {
+    display: flex;
+    flex-direction: column;
+    gap: 30px;
+    margin-top: 30px;
+}
+
+.education-item {
+    display: flex;
+    align-items: flex-start;
+    gap: 20px;
+    background: #f7fafc;
+    padding: 30px;
+    border-radius: 15px;
+    transition: all 0.3s ease;
+    border: 2px solid transparent;
+}
+
+.education-item:hover {
+    transform: translateY(-3px);
+    border-color: #3b82f6;
+    box-shadow: 0 15px 35px rgba(59, 130, 246, 0.1);
+}
+
+.education-logo {
+    flex-shrink: 0;
+    width: 60px;
+    height: 60px;
+    background: linear-gradient(135deg, #10b981 0%, #059669 100%);
+    border-radius: 12px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    color: white;
+    font-size: 1.5rem;
+}
+
+.education-content {
+    flex: 1;
+}
+
+.education-content h3 {
+    font-size: 1.3rem;
+    font-weight: 600;
+    margin-bottom: 5px;
+    color: #2d3748;
+}
+
+.education-content h4 {
+    font-size: 1.1rem;
+    font-weight: 500;
+    color: #10b981;
+    margin-bottom: 8px;
+}
+
+.education-content .duration {
+    font-size: 0.9rem;
+    color: #718096;
+    margin-bottom: 15px;
+    font-weight: 500;
+}
+
+.education-content p:last-child {
+    margin-bottom: 0;
+    line-height: 1.6;
+}
+
 /* Testimonials Section */
 .testimonials-section {
     background: linear-gradient(135deg, #f8fafc 0%, #e2e8f0 100%);
@@ -865,17 +937,27 @@ footer {
         padding: 20px;
     }
     
-    .company-logo {
+    .education-item {
+        flex-direction: column;
+        text-align: left;
+        gap: 15px;
+        padding: 20px;
+    }
+    
+    .company-logo,
+    .education-logo {
         align-self: flex-start;
         margin-bottom: 10px;
     }
     
-    .experience-content h3 {
+    .experience-content h3,
+    .education-content h3 {
         font-size: 1.2rem;
         line-height: 1.3;
     }
     
-    .experience-content h4 {
+    .experience-content h4,
+    .education-content h4 {
         font-size: 1rem;
         margin-bottom: 8px;
     }
@@ -1069,16 +1151,23 @@ footer {
         padding: 15px;
     }
     
-    .experience-content h3 {
+    .education-item {
+        padding: 15px;
+    }
+    
+    .experience-content h3,
+    .education-content h3 {
         font-size: 1.1rem;
         line-height: 1.2;
     }
     
-    .experience-content h4 {
+    .experience-content h4,
+    .education-content h4 {
         font-size: 0.95rem;
     }
     
-    .experience-content p {
+    .experience-content p,
+    .education-content p {
         font-size: 0.9rem;
         line-height: 1.4;
     }
