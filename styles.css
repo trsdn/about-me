@@ -1171,6 +1171,20 @@ footer {
     }
 }
 
+/* Ensure sections are visible on mobile even if JS fails */
+@media (max-width: 768px) {
+    section {
+        opacity: 1 !important;
+        transform: translateY(0) !important;
+    }
+    
+    /* Add slight delay to ensure content loads properly */
+    .case-studies-section {
+        animation: fadeInUp 0.8s ease-out;
+        animation-fill-mode: both;
+    }
+}
+
 .hero, .content section {
     animation: fadeInUp 0.8s ease-out;
 }
@@ -1185,4 +1199,18 @@ footer {
 
 .content section:nth-child(4) {
     animation-delay: 0.6s;
+}
+
+.content section:nth-child(5) {
+    animation-delay: 0.8s;
+}
+
+.content section:nth-child(6) {
+    animation-delay: 1.0s;
+}
+
+/* Add class for successfully animated sections */
+.animated {
+    opacity: 1 !important;
+    transform: translateY(0) !important;
 }

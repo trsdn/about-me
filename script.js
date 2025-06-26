@@ -31,8 +31,22 @@ document.addEventListener('DOMContentLoaded', function() {
         });
     }
     
-    // Show/hide sticky navigation based on scroll
-    window.addEventListener('scroll', function() {
+    // Throttle function for better performance
+    function throttle(func, wait) {
+        let timeout;
+        return function executedFunction(...args) {
+            const later = () => {
+                clearTimeout(timeout);
+                func(...args);
+            };
+            clearTimeout(timeout);
+            timeout = setTimeout(later, wait);
+        };
+    }
+    
+    // Combined scroll handler (throttled for performance)
+    const handleScroll = throttle(() => {
+        // Show/hide sticky navigation
         if (heroSection) {
             const heroBottom = heroSection.offsetTop + heroSection.offsetHeight;
             
@@ -45,7 +59,18 @@ document.addEventListener('DOMContentLoaded', function() {
         
         // Update active navigation link
         updateActiveNavLink();
-    });
+        
+        // Subtle parallax effect for hero section (disabled on mobile for performance)
+        if (window.innerWidth > 768) {
+            const scrolled = window.pageYOffset;
+            const hero = document.querySelector('.hero');
+            if (hero && scrolled < hero.offsetHeight) {
+                hero.style.transform = `translateY(${scrolled * 0.5}px)`;
+            }
+        }
+    }, 16); // ~60fps
+    
+    window.addEventListener('scroll', handleScroll);
     
     // Smooth scrolling for anchor links with offset for sticky nav
     document.querySelectorAll('a[href^="#"]').forEach(anchor => {
@@ -61,6 +86,12 @@ document.addEventListener('DOMContentLoaded', function() {
                     top: targetPosition,
                     behavior: 'smooth'
                 });
+                
+                // Close mobile menu if open
+                if (mobileMenuToggle && mobileMenu) {
+                    mobileMenuToggle.classList.remove('active');
+                    mobileMenu.classList.remove('active');
+                }
             }
         });
     });
@@ -94,40 +125,33 @@ document.addEventListener('DOMContentLoaded', function() {
     }
 });
 
-// Smooth scrolling for anchor links (legacy support)
-document.querySelectorAll('a[href^="#"]').forEach(anchor => {
-    anchor.addEventListener('click', function (e) {
-        e.preventDefault();
-        const target = document.querySelector(this.getAttribute('href'));
-        if (target) {
-            target.scrollIntoView({
-                behavior: 'smooth',
-                block: 'start'
-            });
-        }
-    });
-});
-
-// Add animation classes on scroll
+// Improved animation with Intersection Observer (better for mobile)
 const observerOptions = {
     threshold: 0.1,
-    rootMargin: '0px 0px -50px 0px'
+    rootMargin: '0px 0px -30px 0px' // Reduced margin for better mobile experience
 };
 
 const observer = new IntersectionObserver((entries) => {
     entries.forEach(entry => {
         if (entry.isIntersecting) {
-            entry.target.style.opacity = '1';
-            entry.target.style.transform = 'translateY(0)';
+            // Add a small delay to ensure content is ready
+            setTimeout(() => {
+                entry.target.style.opacity = '1';
+                entry.target.style.transform = 'translateY(0)';
+                entry.target.classList.add('animated');
+            }, 50);
         }
     });
 }, observerOptions);
 
-// Observe all sections for animation
-document.querySelectorAll('section').forEach(section => {
+// Observe all sections for animation with better mobile handling
+document.querySelectorAll('section').forEach((section, index) => {
+    // Set initial state
     section.style.opacity = '0';
-    section.style.transform = 'translateY(30px)';
+    section.style.transform = 'translateY(20px)'; // Reduced for mobile
     section.style.transition = 'opacity 0.6s ease, transform 0.6s ease';
+    section.style.transitionDelay = `${index * 0.1}s`; // Stagger animations
+    
     observer.observe(section);
 });
 
@@ -147,29 +171,6 @@ if (footerText) {
     footerText.innerHTML = footerText.innerHTML.replace('2025', currentYear);
 }
 
-// Add a simple typing effect to the title (optional)
-function typeWriter(element, text, speed = 100) {
-    let i = 0;
-    element.innerHTML = '';
-    
-    function type() {
-        if (i < text.length) {
-            element.innerHTML += text.charAt(i);
-            i++;
-            setTimeout(type, speed);
-        }
-    }
-    
-    type();
-}
-
-// Uncomment the following lines if you want a typing effect on the title
-// const titleElement = document.querySelector('.title');
-// const originalTitle = titleElement.textContent;
-// setTimeout(() => {
-//     typeWriter(titleElement, originalTitle, 150);
-// }, 1000);
-
 // Add click tracking for project links (for analytics)
 document.querySelectorAll('.project-links a').forEach(link => {
     link.addEventListener('click', function(e) {
@@ -184,42 +185,31 @@ function validateEmail(email) {
     return re.test(email);
 }
 
-// Easter egg: Konami code
-let konamiCode = [];
-const konami = [38, 38, 40, 40, 37, 39, 37, 39, 66, 65]; // ↑↑↓↓←→←→BA
+// Easter egg: Konami code (disabled on mobile for performance)
+if (window.innerWidth > 768) {
+    let konamiCode = [];
+    const konami = [38, 38, 40, 40, 37, 39, 37, 39, 66, 65]; // ↑↑↓↓←→←→BA
 
-document.addEventListener('keydown', function(e) {
-    konamiCode.push(e.keyCode);
-    if (konamiCode.length > konami.length) {
-        konamiCode.shift();
-    }
-    
-    if (konamiCode.toString() === konami.toString()) {
-        // Easter egg activated!
-        document.body.style.transform = 'rotate(180deg)';
-        setTimeout(() => {
-            document.body.style.transform = 'rotate(0deg)';
-        }, 2000);
-        konamiCode = [];
-    }
-});
+    document.addEventListener('keydown', function(e) {
+        konamiCode.push(e.keyCode);
+        if (konamiCode.length > konami.length) {
+            konamiCode.shift();
+        }
+        
+        if (konamiCode.toString() === konami.toString()) {
+            // Easter egg activated!
+            document.body.style.transform = 'rotate(180deg)';
+            setTimeout(() => {
+                document.body.style.transform = 'rotate(0deg)';
+            }, 2000);
+            konamiCode = [];
+        }
+    });
+}
 
 // Add smooth transitions when page loads
 window.addEventListener('load', function() {
     document.body.style.opacity = '1';
     document.body.style.transition = 'opacity 0.5s ease-in-out';
-});
-
-// Initialize page
-document.addEventListener('DOMContentLoaded', function() {
     console.log('About Me website loaded successfully! 🚀');
-    
-    // Add a subtle parallax effect to the hero section
-    window.addEventListener('scroll', function() {
-        const scrolled = window.pageYOffset;
-        const hero = document.querySelector('.hero');
-        if (hero && scrolled < hero.offsetHeight) {
-            hero.style.transform = `translateY(${scrolled * 0.5}px)`;
-        }
-    });
 });
