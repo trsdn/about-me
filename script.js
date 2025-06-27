@@ -140,34 +140,56 @@ document.addEventListener('DOMContentLoaded', function() {
     }
 });
 
-// Improved animation with Intersection Observer (better for mobile)
+// Improved animation with Intersection Observer (better for mobile and content visibility)
 const observerOptions = {
-    threshold: 0.1,
-    rootMargin: '0px 0px -30px 0px' // Reduced margin for better mobile experience
+    threshold: 0.05, // Trigger when just 5% is visible
+    rootMargin: '100px 0px 200px 0px' // Large margins to load content early
 };
 
 const observer = new IntersectionObserver((entries) => {
     entries.forEach(entry => {
         if (entry.isIntersecting) {
-            // Add a small delay to ensure content is ready
-            setTimeout(() => {
+            // Immediate animation - no delay
+            entry.target.style.opacity = '1';
+            entry.target.style.transform = 'translateY(0)';
+            entry.target.classList.add('animated');
+        } else {
+            // Keep content visible when scrolling back up
+            // Only add subtle effect when moving out of view
+            if (entry.boundingClientRect.top > window.innerHeight) {
+                // Content is below viewport
+                entry.target.style.opacity = '0.8';
+                entry.target.style.transform = 'translateY(10px)';
+            } else {
+                // Content is above viewport - keep it fully visible
                 entry.target.style.opacity = '1';
                 entry.target.style.transform = 'translateY(0)';
-                entry.target.classList.add('animated');
-            }, 50);
+            }
         }
     });
 }, observerOptions);
 
 // Observe all sections for animation with better mobile handling
 document.querySelectorAll('section').forEach((section, index) => {
-    // Set initial state
-    section.style.opacity = '0';
-    section.style.transform = 'translateY(20px)'; // Reduced for mobile
-    section.style.transition = 'opacity 0.6s ease, transform 0.6s ease';
-    section.style.transitionDelay = `${index * 0.1}s`; // Stagger animations
+    // Set initial state - content is visible but slightly offset
+    section.style.opacity = '0.8'; // Start partially visible instead of completely hidden
+    section.style.transform = 'translateY(10px)'; // Minimal offset
+    section.style.transition = 'opacity 0.4s ease, transform 0.4s ease'; // Faster animation
+    section.style.transitionDelay = `${index * 0.05}s`; // Faster stagger
     
     observer.observe(section);
+});
+
+// Fallback: Ensure all content is visible after page load
+window.addEventListener('load', function() {
+    setTimeout(() => {
+        document.querySelectorAll('section').forEach(section => {
+            if (section.style.opacity !== '1') {
+                section.style.opacity = '1';
+                section.style.transform = 'translateY(0)';
+            }
+        });
+    }, 1000); // Give animations time to trigger naturally first
 });
 
 // Add hover effect to profile picture
