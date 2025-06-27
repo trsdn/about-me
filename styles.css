@@ -883,7 +883,7 @@ footer {
     }
     
     .content {
-        padding: 40px 15px;
+        padding: 40px 25px;
         margin-top: 20px;
     }
     
@@ -1087,11 +1087,11 @@ footer {
 
 @media (max-width: 480px) {
     .container {
-        padding: 0 10px;
+        padding: 0 20px;
     }
     
     .nav-container {
-        padding: 0 10px;
+        padding: 0 20px;
     }
     
     .hero {
@@ -1116,7 +1116,7 @@ footer {
     }
     
     .content {
-        padding: 30px 10px;
+        padding: 30px 20px;
     }
     
     h2 {
