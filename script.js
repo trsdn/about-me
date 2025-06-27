@@ -10,8 +10,19 @@ document.addEventListener('DOMContentLoaded', function() {
     // Mobile menu toggle
     if (mobileMenuToggle && mobileMenu) {
         mobileMenuToggle.addEventListener('click', function() {
+            const isExpanded = mobileMenuToggle.getAttribute('aria-expanded') === 'true';
             mobileMenuToggle.classList.toggle('active');
             mobileMenu.classList.toggle('active');
+            
+            // Update aria-expanded attribute
+            mobileMenuToggle.setAttribute('aria-expanded', !isExpanded);
+            
+            // Update aria-label based on state
+            if (!isExpanded) {
+                mobileMenuToggle.setAttribute('aria-label', 'Close navigation menu');
+            } else {
+                mobileMenuToggle.setAttribute('aria-label', 'Open navigation menu');
+            }
         });
         
         // Close mobile menu when clicking on a link
@@ -19,6 +30,8 @@ document.addEventListener('DOMContentLoaded', function() {
             link.addEventListener('click', function() {
                 mobileMenuToggle.classList.remove('active');
                 mobileMenu.classList.remove('active');
+                mobileMenuToggle.setAttribute('aria-expanded', 'false');
+                mobileMenuToggle.setAttribute('aria-label', 'Open navigation menu');
             });
         });
         
@@ -27,6 +40,8 @@ document.addEventListener('DOMContentLoaded', function() {
             if (!stickyNav.contains(e.target)) {
                 mobileMenuToggle.classList.remove('active');
                 mobileMenu.classList.remove('active');
+                mobileMenuToggle.setAttribute('aria-expanded', 'false');
+                mobileMenuToggle.setAttribute('aria-label', 'Open navigation menu');
             }
         });
     }
