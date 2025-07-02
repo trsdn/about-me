@@ -1,3 +1,6 @@
+if we make changes on file we make sure to check if other files are affected
+we write proper markdown
+we check on typos and grammar
 we use github mcp
 we use playwright mcp to test the website and the performance
 we always test our implementations
