@@ -246,12 +246,12 @@
     <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
     
     <!-- Preload critical resources -->
-    <link rel="preload" href="torstenmahr-optimized.jpeg" as="image">
+    <link rel="preload" href="torstenmahr.webp" as="image" type="image/webp">
+    <link rel="preload" href="torstenmahr-optimized.jpeg" as="image" type="image/jpeg">
     <link rel="preload" href="styles.css" as="style">
     
     <!-- DNS prefetch for external resources -->
     <link rel="dns-prefetch" href="//fonts.googleapis.com">
-    <link rel="dns-prefetch" href="//cdnjs.cloudflare.com">
     
     <!-- Critical CSS inline for faster rendering -->
     <style>
@@ -333,6 +333,11 @@
             font-weight: 500; 
             transition: color 0.3s ease; 
         }
+        /* SVG Icon styles */
+        .icon { width: 1.2em; height: 1.2em; fill: currentColor; display: inline-block; }
+        .skill-item .icon { width: 2em; height: 2em; margin-bottom: 10px; }
+        .company-logo .icon { width: 2.5em; height: 2.5em; }
+        .education-logo .icon { width: 2.5em; height: 2.5em; }
         @media (max-width: 768px) {
             .nav-links { display: none; }
             .name { font-size: 2.5rem; }
@@ -340,9 +345,103 @@
         }
     </style>
     
-    <!-- Defer Font Awesome loading -->
-    <link rel="preload" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css" as="style" onload="this.onload=null;this.rel='stylesheet'">
-    <noscript><link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css"></noscript>
+    <!-- Load Google Fonts with preconnect for faster loading -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+    
+    <!-- Load main stylesheet asynchronously -->
+    <link rel="preload" href="styles.css" as="style" onload="this.onload=null;this.rel='stylesheet'">
+    <noscript><link rel="stylesheet" href="styles.css"></noscript>
+    
+    <!-- SVG Icon Definitions -->
+    <svg style="display: none;">
+        <defs>
+            <!-- Social Icons -->
+            <symbol id="icon-github" viewBox="0 0 24 24">
+                <path d="M12 2C6.477 2 2 6.484 2 12.017c0 4.425 2.865 8.18 6.839 9.504.5.092.682-.217.682-.483 0-.237-.008-.868-.013-1.703-2.782.605-3.369-1.343-3.369-1.343-.454-1.158-1.11-1.466-1.11-1.466-.908-.62.069-.608.069-.608 1.003.07 1.531 1.032 1.531 1.032.892 1.53 2.341 1.088 2.91.832.092-.647.35-1.088.636-1.338-2.22-.253-4.555-1.113-4.555-4.951 0-1.093.39-1.988 1.029-2.688-.103-.253-.446-1.272.098-2.65 0 0 .84-.27 2.75 1.026A9.564 9.564 0 0112 6.844c.85.004 1.705.115 2.504.337 1.909-1.296 2.747-1.027 2.747-1.027.546 1.379.202 2.398.1 2.651.64.7 1.028 1.595 1.028 2.688 0 3.848-2.339 4.695-4.566 4.943.359.309.678.92.678 1.855 0 1.338-.012 2.419-.012 2.747 0 .268.18.58.688.482A10.019 10.019 0 0022 12.017C22 6.484 17.522 2 12 2z"/>
+            </symbol>
+            <symbol id="icon-linkedin" viewBox="0 0 24 24">
+                <path d="M20.447 20.452h-3.554v-5.569c0-1.328-.027-3.037-1.852-3.037-1.853 0-2.136 1.445-2.136 2.939v5.667H9.351V9h3.414v1.561h.046c.477-.9 1.637-1.85 3.37-1.85 3.601 0 4.267 2.37 4.267 5.455v6.286zM5.337 7.433c-1.144 0-2.063-.926-2.063-2.065 0-1.138.92-2.063 2.063-2.063 1.14 0 2.064.925 2.064 2.063 0 1.139-.925 2.065-2.064 2.065zm1.782 13.019H3.555V9h3.564v11.452zM22.225 0H1.771C.792 0 0 .774 0 1.729v20.542C0 23.227.792 24 1.771 24h20.451C23.2 24 24 23.227 24 22.271V1.729C24 .774 23.2 0 22.222 0h.003z"/>
+            </symbol>
+            <symbol id="icon-twitter" viewBox="0 0 24 24">
+                <path d="M23.953 4.57a10 10 0 01-2.825.775 4.958 4.958 0 002.163-2.723c-.951.555-2.005.959-3.127 1.184a4.92 4.92 0 00-8.384 4.482C7.69 8.095 4.067 6.13 1.64 3.162a4.822 4.822 0 00-.666 2.475c0 1.71.87 3.213 2.188 4.096a4.904 4.904 0 01-2.228-.616v.06a4.923 4.923 0 003.946 4.827 4.996 4.996 0 01-2.212.085 4.936 4.936 0 004.604 3.417 9.867 9.867 0 01-6.102 2.105c-.39 0-.779-.023-1.17-.067a13.995 13.995 0 007.557 2.209c9.053 0 13.998-7.496 13.998-13.985 0-.21 0-.42-.015-.63A9.935 9.935 0 0024 4.59z"/>
+            </symbol>
+            
+            <!-- Skill Icons -->
+            <symbol id="icon-brain" viewBox="0 0 24 24">
+                <path d="M21.33 12.91c.09-.17.14-.36.14-.55v-.72c0-.31-.13-.6-.35-.8-.22-.2-.52-.32-.83-.32-.16 0-.31.03-.45.08C19.66 8.93 18.25 7.86 16.5 7.5c-.08-1.65-1.39-2.96-3.05-3.04C13.32 3.32 12.17 2.5 10.81 2.5S8.3 3.32 8.17 4.46c-1.66.08-2.97 1.39-3.05 3.04C3.37 7.86 1.96 8.93 1.73 10.6c-.14-.05-.29-.08-.45-.08-.31 0-.61.12-.83.32-.22.2-.35.49-.35.8v.72c0 .19.05.38.14.55.09.17.22.32.38.43.47.32.76.86.76 1.45s-.29 1.13-.76 1.45c-.16.11-.29.26-.38.43-.09.17-.14.36-.14.55v.72c0 .31.13.6.35.8.22.2.52.32.83.32.16 0 .31-.03.45-.08.23 1.67 1.64 2.74 3.39 3.1.08 1.65 1.39 2.96 3.05 3.04.13 1.14 1.28 1.96 2.64 1.96s2.51-.82 2.64-1.96c1.66-.08 2.97-1.39 3.05-3.04 1.75-.36 3.16-1.43 3.39-3.1.14.05.29.08.45.08.31 0 .61-.12.83-.32.22-.2.35-.49.35-.8v-.72c0-.19-.05-.38-.14-.55-.09-.17-.22-.32-.38-.43-.47-.32-.76-.86-.76-1.45s.29-1.13.76-1.45c.16-.11.29-.26.38-.43z"/>
+            </symbol>
+            <symbol id="icon-cloud" viewBox="0 0 24 24">
+                <path d="M19.5 16h-15A4.5 4.5 0 010 11.5 4.5 4.5 0 014.5 7h.09C5.28 4.47 7.47 2.5 10.13 2.5c2.02 0 3.82 1.24 4.56 3.15.67-.41 1.46-.65 2.31-.65 2.49 0 4.5 2.01 4.5 4.5 0 .17-.01.34-.03.5H21a3 3 0 010 6h-1.5z"/>
+            </symbol>
+            <symbol id="icon-handshake" viewBox="0 0 24 24">
+                <path d="M21.71 8.71c1.25-1.25.68-2.35 0-3.03l-3.03-3.03c-.68-.68-1.78-1.25-3.03 0L11 7.29 6.35 2.65c-1.25-1.25-2.35-.68-3.03 0L.29 5.68c-.68.68-1.25 1.78 0 3.03L5.64 14 .29 18.68c-.68.68-1.25 1.78 0 3.03l3.03 3.03c.68.68 1.78 1.25 3.03 0L11 20.39l4.65 4.64c1.25 1.25 2.35.68 3.03 0l3.03-3.03c.68-.68 1.25-1.78 0-3.03L18.36 14l4.65-4.64c.68-.68 1.25-1.78 0-3.03z"/>
+            </symbol>
+            <symbol id="icon-microsoft" viewBox="0 0 24 24">
+                <path d="M11.4 24H0V12.6h11.4V24zM24 24H12.6V12.6H24V24zM11.4 11.4H0V0h11.4v11.4zM24 11.4H12.6V0H24v11.4z"/>
+            </symbol>
+            <symbol id="icon-aws" viewBox="0 0 24 24">
+                <path d="M6.763 10.036c0 .296.032.535.088.71.064.176.144.368.256.576.04.063.056.127.056.183 0 .08-.048.16-.151.24l-.503.335c-.072.048-.144.071-.208.071-.08 0-.16-.04-.239-.112-.112-.12-.207-.248-.279-.383-.072-.135-.144-.287-.207-.455-.528.623-1.191.934-1.975.934-.568 0-1.023-.16-1.359-.48-.336-.32-.504-.75-.504-1.279 0-.568.2-1.023.607-1.359.408-.336.96-.504 1.671-.504.231 0 .471.016.727.056.255.04.52.088.791.151v-.495c0-.52-.107-.888-.327-1.111-.215-.224-.575-.336-1.087-.336-.231 0-.471.024-.71.08-.24.055-.479.128-.71.215-.104.04-.184.063-.231.071-.048.008-.08.008-.104.008-.088 0-.135-.064-.135-.191v-.303c0-.096.016-.168.056-.215.04-.048.112-.096.2-.144.231-.12.512-.215.839-.295.336-.08.679-.12 1.031-.12.791 0 1.367.183 1.727.544.36.36.544.9.544 1.615v2.144zm-2.735 1.031c.224 0 .455-.04.703-.12.247-.08.464-.2.646-.36.112-.104.191-.224.231-.36.04-.135.064-.295.064-.479v-.231c-.2-.048-.415-.088-.639-.112-.224-.032-.447-.048-.671-.048-.479 0-.831.096-1.063.287-.231.192-.343.463-.343.815 0 .335.08.583.247.735.168.16.415.24.775.24l.05-.367zm5.423.735c-.112 0-.191-.02-.231-.063-.048-.04-.088-.127-.135-.247L7.27 5.95c-.04-.135-.063-.224-.063-.271 0-.104.056-.16.16-.16h.646c.112 0 .191.02.231.063.048.04.08.127.127.247l1.383 5.431 1.287-5.431c.04-.135.08-.207.127-.247.048-.04.135-.063.231-.063h.527c.112 0 .191.02.231.063.048.04.088.127.127.247l1.303 5.495L14.862 5.99c.04-.135.08-.207.127-.247.048-.04.135-.063.231-.063h.607c.104 0 .16.056.16.16 0 .032-.008.063-.016.104-.008.04-.024.096-.048.167l-1.943 6.24c-.048.135-.088.207-.135.247-.048.04-.127.063-.231.063h-.568c-.112 0-.191-.02-.231-.063-.048-.04-.088-.127-.127-.247L11.422 7.27l-1.255 5.12c-.04.135-.08.207-.127.247-.048.04-.135.063-.231.063h-.568zm8.853.207c-.343 0-.687-.04-1.023-.12-.336-.08-.607-.16-.799-.24-.096-.04-.16-.088-.191-.127-.032-.04-.048-.096-.048-.16v-.311c0-.127.048-.191.135-.191.048 0 .096.008.144.024.048.016.12.048.2.08.263.12.543.215.839.279.295.063.591.096.886.096.471 0 .839-.08 1.103-.247.263-.168.399-.415.399-.735 0-.216-.056-.399-.168-.551-.112-.151-.296-.295-.543-.423l-.775-.24c-.391-.127-.679-.315-.862-.568-.184-.248-.279-.535-.279-.862 0-.247.056-.471.16-.671.104-.2.248-.368.431-.504.184-.135.399-.24.647-.311.247-.072.52-.104.807-.104.151 0 .303.012.447.032.151.02.287.048.415.08.127.031.247.071.36.111.112.04.2.08.255.127.08.063.135.127.167.2.032.071.048.151.048.231v.295c0 .127-.048.191-.135.191-.056 0-.135-.024-.231-.071-.335-.151-.711-.224-1.127-.224-.432 0-.767.072-.999.215-.231.144-.351.359-.351.647 0 .216.064.4.184.559.12.16.32.303.6.432l.759.24c.384.127.663.307.831.543.168.235.255.507.255.815 0 .256-.056.487-.16.695-.104.208-.256.387-.447.528-.2.144-.432.248-.695.32-.271.063-.559.103-.862.103z"/>
+            </symbol>
+            
+            <!-- Additional Skill Icons -->
+            <symbol id="icon-microphone" viewBox="0 0 24 24">
+                <path d="M12 14c1.66 0 3-1.34 3-3V5c0-1.66-1.34-3-3-3S9 3.34 9 5v6c0 1.66 1.34 3 3 3z M17.3 11c0 3-2.54 5.1-5.3 5.1S6.7 14 6.7 11H5c0 3.41 2.72 6.23 6 6.72V21h2v-3.28c3.28-.48 6-3.3 6-6.72h-1.7z"/>
+            </symbol>
+            <symbol id="icon-rocket" viewBox="0 0 24 24">
+                <path d="M12 2C13.1 2 14 2.9 14 4C14 5.1 13.1 6 12 6C10.9 6 10 5.1 10 4C10 2.9 10.9 2 12 2ZM21 9V7L15 1H9V3H7V7H5L11 13L13 15L19 9H21ZM7 15L9 17H15L17 15L15 13H9L7 15ZM3 21V19H5V21H3ZM7 21V19H9V21H7ZM11 21V19H13V21H11ZM15 21V19H17V21H15ZM19 21V19H21V21H19Z"/>
+            </symbol>
+            <symbol id="icon-users" viewBox="0 0 24 24">
+                <path d="M16 4c0-1.11.89-2 2-2s2 .89 2 2-.89 2-2 2-2-.89-2-2zM4 4c0-1.11.89-2 2-2s2 .89 2 2-.89 2-2 2-2-.89-2-2zm5.5 3c1.1 0 2-.9 2-2s-.9-2-2-2-2 .9-2 2 .9 2 2 2zM1 9v2h6v2c0 .55.45 1 1 1h8c.55 0 1-.45 1-1v-2h6V9c0-.55-.45-1-1-1H2c-.55 0-1 .45-1 1zm22 9c0 1.1-.9 2-2 2H3c-1.1 0-2-.9-2-2v-4c0-1.1.9-2 2-2h18c1.1 0 2 .9 2 2v4z"/>
+            </symbol>
+            <symbol id="icon-shield" viewBox="0 0 24 24">
+                <path d="M12,1L3,5V11C3,16.55 6.84,21.74 12,23C17.16,21.74 21,16.55 21,11V5L12,1M12,7C13.4,7 14.8,8.6 14.8,10V11.5H16.5V16.5H7.5V11.5H9.2V10C9.2,8.6 10.6,7 12,7M12,8.2C11.2,8.2 10.5,8.7 10.5,10V11.5H13.5V10C13.5,8.7 12.8,8.2 12,8.2Z"/>
+            </symbol>
+            <symbol id="icon-chart-line" viewBox="0 0 24 24">
+                <path d="M16,6L18.29,8.29L13.41,13.17L9.41,9.17L2,16.59L3.41,18L9.41,12L13.41,16L19.71,9.71L22,12V6H16Z"/>
+            </symbol>
+            <symbol id="icon-sitemap" viewBox="0 0 24 24">
+                <path d="M9,2V8H7V10H9C10.1,10 11,9.1 11,8V4H13V8C13,9.1 13.9,10 15,10H17V8H15V2H9M12,11A1,1 0 0,0 11,12A1,1 0 0,0 12,13A1,1 0 0,0 13,12A1,1 0 0,0 12,11M8,14A1,1 0 0,0 7,15A1,1 0 0,0 8,16A1,1 0 0,0 9,15A1,1 0 0,0 8,14M16,14A1,1 0 0,0 15,15A1,1 0 0,0 16,16A1,1 0 0,0 17,15A1,1 0 0,0 16,14M8,18V24H14V18C14,16.9 13.1,16 12,16S10,16.9 10,18V22H12V18H8M16,18V24H22V18C22,16.9 21.1,16 20,16S18,16.9 18,18V22H20V18H16M2,18V24H8V18C8,16.9 7.1,16 6,16S4,16.9 4,18V22H6V18H2Z"/>
+            </symbol>
+            <symbol id="icon-balance-scale" viewBox="0 0 24 24">
+                <path d="M7,3H17A1,1 0 0,1 18,4A1,1 0 0,1 17,5H16L15.42,21.21C15.37,21.71 14.94,22.08 14.44,22.08H9.56C9.06,22.08 8.63,21.71 8.58,21.21L8,5H7A1,1 0 0,1 6,4A1,1 0 0,1 7,3M9,8V10H10V8H9M10.5,8V10H11.5V8H10.5M12,8V10H13V8H12M13.5,8V10H14.5V8H13.5M15,8V10H16V8H15Z"/>
+            </symbol>
+            <symbol id="icon-users-cog" viewBox="0 0 24 24">
+                <path d="M12,15.5A3.5,3.5 0 0,1 8.5,12A3.5,3.5 0 0,1 12,8.5A3.5,3.5 0 0,1 15.5,12A3.5,3.5 0 0,1 12,15.5M19.43,12.97C19.47,12.65 19.5,12.33 19.5,12C19.5,11.67 19.47,11.34 19.43,11L21.54,9.37C21.73,9.22 21.78,8.95 21.66,8.73L19.66,5.27C19.54,5.05 19.27,4.96 19.05,5.05L16.56,6.05C16.04,5.66 15.5,5.32 14.87,5.07L14.5,2.42C14.46,2.18 14.25,2 14,2H10C9.75,2 9.54,2.18 9.5,2.42L9.13,5.07C8.5,5.32 7.96,5.66 7.44,6.05L4.95,5.05C4.73,4.96 4.46,5.05 4.34,5.27L2.34,8.73C2.22,8.95 2.27,9.22 2.46,9.37L4.57,11C4.53,11.34 4.5,11.67 4.5,12C4.5,12.33 4.53,12.65 4.57,12.97L2.46,14.63C2.27,14.78 2.22,15.05 2.34,15.27L4.34,18.73C4.46,18.95 4.73,19.03 4.95,18.95L7.44,17.94C7.96,18.34 8.5,18.68 9.13,18.93L9.5,21.58C9.54,21.82 9.75,22 10,22H14C14.25,22 14.46,21.82 14.5,21.58L14.87,18.93C15.5,18.68 16.04,18.34 16.56,17.94L19.05,18.95C19.27,19.03 19.54,18.95 19.66,18.73L21.66,15.27C21.78,15.05 21.73,14.78 21.54,14.63L19.43,12.97Z"/>
+            </symbol>
+            <symbol id="icon-university" viewBox="0 0 24 24">
+                <path d="M12,3L1,9L12,15L21,10.09V17H23V9M5,13.18V17.18L12,21L19,17.18V13.18L12,17L5,13.18Z"/>
+            </symbol>
+            <symbol id="icon-lightbulb" viewBox="0 0 24 24">
+                <path d="M12,2A7,7 0 0,0 5,9C5,11.38 6.19,13.47 8,14.74V17A1,1 0 0,0 9,18H15A1,1 0 0,0 16,17V14.74C17.81,13.47 19,11.38 19,9A7,7 0 0,0 12,2M9,21A1,1 0 0,0 10,22H14A1,1 0 0,0 15,21V20H9V21Z"/>
+            </symbol>
+            <symbol id="icon-graduation-cap" viewBox="0 0 24 24">
+                <path d="M12,3L1,9L12,15L21,10.09V17H23V9M5,13.18V17.18L12,21L19,17.18V13.18L12,17L5,13.18Z"/>
+            </symbol>
+            <symbol id="icon-puzzle-piece" viewBox="0 0 24 24">
+                <path d="M20.5,11H19V7C19,5.89 18.1,5 17,5H13V3.5A2.5,2.5 0 0,0 10.5,1A2.5,2.5 0 0,0 8,3.5V5H4A2,2 0 0,0 2,7V10.8H3.5C5,10.8 6.2,12 6.2,13.5C6.2,15 5,16.2 3.5,16.2H2V20A2,2 0 0,0 4,22H7.8V20.5C7.8,19 9,17.8 10.5,17.8C12,17.8 13.2,19 13.2,20.5V22H17A2,2 0 0,0 19,20V16H20.5A2.5,2.5 0 0,0 23,13.5A2.5,2.5 0 0,0 20.5,11Z"/>
+            </symbol>
+            <symbol id="icon-hands-helping" viewBox="0 0 24 24">
+                <path d="M13,14C9.64,14 8.54,15.35 8.18,16.24C9.25,16.7 10,17.76 10,19A3,3 0 0,1 7,22A3,3 0 0,1 4,19C4,17.69 4.83,16.58 6,16.17V14.17C6,12.85 6.94,11.74 8.21,11.6L13,11C20,11 20,4 20,4C20,4 20,11 13,14M5,19A1,1 0 0,0 6,20A1,1 0 0,0 7,19A1,1 0 0,0 6,18A1,1 0 0,0 5,19M21,12L15,18H12V15H9V12H15L21,6V12Z"/>
+            </symbol>
+            <symbol id="icon-globe" viewBox="0 0 24 24">
+                <path d="M17.9,17.39C17.64,16.59 16.89,16 16,16H15V13A1,1 0 0,0 14,12H8V10H10A1,1 0 0,0 11,9V7H13A2,2 0 0,0 15,5V4.59C17.93,5.77 20,8.64 20,12C20,14.08 19.2,15.97 17.9,17.39M11,19.93C7.05,19.44 4,16.08 4,12C4,11.38 4.08,10.78 4.21,10.21L9,15V16A2,2 0 0,0 11,18M12,2A10,10 0 0,0 2,12A10,10 0 0,0 12,22A10,10 0 0,0 22,12A10,10 0 0,0 12,2Z"/>
+            </symbol>
+            <symbol id="icon-quote-left" viewBox="0 0 24 24">
+                <path d="M14,17H17L19,13V7H13V13H16M6,17H9L11,13V7H5V13H8L6,17Z"/>
+            </symbol>
+            <symbol id="icon-car" viewBox="0 0 24 24">
+                <path d="M5,11L6.5,6.5H17.5L19,11M17.5,16A1.5,1.5 0 0,1 16,14.5A1.5,1.5 0 0,1 17.5,13A1.5,1.5 0 0,1 19,14.5A1.5,1.5 0 0,1 17.5,16M6.5,16A1.5,1.5 0 0,1 5,14.5A1.5,1.5 0 0,1 6.5,13A1.5,1.5 0 0,1 8,14.5A1.5,1.5 0 0,1 6.5,16M18.92,6C18.72,5.42 18.16,5 17.5,5H6.5C5.84,5 5.28,5.42 5.08,6L3,12V20A1,1 0 0,0 4,21H5A1,1 0 0,0 6,20V19H18V20A1,1 0 0,0 19,21H20A1,1 0 0,0 21,20V12L18.92,6Z"/>
+            </symbol>
+            <symbol id="icon-cogs" viewBox="0 0 24 24">
+                <path d="M15.9,18.45C17.25,18.45 18.35,17.35 18.35,16C18.35,14.65 17.25,13.55 15.9,13.55C14.54,13.55 13.45,14.65 13.45,16C13.45,17.35 14.54,18.45 15.9,18.45M21.1,16.68L22.58,17.84C22.71,17.95 22.75,18.13 22.66,18.29L21.26,20.71C21.17,20.86 21,20.92 20.83,20.86L19.09,20.16C18.73,20.44 18.33,20.67 17.91,20.85L17.64,22.7C17.62,22.87 17.47,23 17.3,23H14.5C14.32,23 14.18,22.87 14.15,22.7L13.89,20.85C13.46,20.67 13.07,20.44 12.71,20.16L10.96,20.86C10.81,20.92 10.63,20.86 10.54,20.71L9.14,18.29C9.05,18.13 9.09,17.95 9.22,17.84L10.7,16.68L10.65,16L10.7,15.31L9.22,14.16C9.09,14.05 9.05,13.86 9.14,13.71L10.54,11.29C10.63,11.13 10.81,11.07 10.96,11.13L12.71,11.84C13.07,11.56 13.46,11.32 13.89,11.15L14.15,9.29C14.18,9.13 14.32,9 14.5,9H17.3C17.47,9 17.62,9.13 17.64,9.29L17.91,11.15C18.33,11.32 18.73,11.56 19.09,11.84L20.83,11.13C21,11.07 21.17,11.13 21.26,11.29L22.66,13.71C22.75,13.86 22.71,14.05 22.58,14.16L21.1,15.31L21.15,16L21.1,16.68M6.69,8.07C7.56,8.07 8.26,7.37 8.26,6.5C8.26,5.63 7.56,4.93 6.69,4.93C5.82,4.93 5.12,5.63 5.12,6.5C5.12,7.37 5.82,8.07 6.69,8.07M10.03,6.94L11,7.68C11.07,7.75 11.09,7.87 11.03,7.97L10.13,9.53C10.08,9.63 9.96,9.67 9.86,9.63L8.74,9.18C8.5,9.3 8.24,9.39 7.97,9.44L7.8,10.63C7.78,10.73 7.69,10.8 7.59,10.8H5.79C5.69,10.8 5.6,10.73 5.58,10.63L5.41,9.44C5.14,9.39 4.88,9.3 4.64,9.18L3.5,9.63C3.41,9.67 3.3,9.63 3.25,9.53L2.34,7.97C2.28,7.87 2.31,7.75 2.39,7.68L3.34,6.94L3.31,6.5L3.34,6.06L2.39,5.32C2.31,5.25 2.28,5.13 2.34,5.03L3.25,3.47C3.3,3.37 3.41,3.33 3.5,3.37L4.63,3.82C4.87,3.7 5.14,3.61 5.41,3.56L5.58,2.37C5.6,2.27 5.69,2.2 5.79,2.2H7.59C7.69,2.2 7.78,2.27 7.8,2.37L7.97,3.56C8.24,3.61 8.5,3.7 8.74,3.82L9.86,3.37C9.96,3.33 10.08,3.37 10.13,3.47L11.03,5.03C11.09,5.13 11.07,5.25 11,5.32L10.03,6.06L10.06,6.5L10.03,6.94Z"/>
+            </symbol>
+            <symbol id="icon-server" viewBox="0 0 24 24">
+                <path d="M4,1H20A1,1 0 0,1 21,2V6A1,1 0 0,1 20,7H4A1,1 0 0,1 3,6V2A1,1 0 0,1 4,1M4,9H20A1,1 0 0,1 21,10V14A1,1 0 0,1 20,15H4A1,1 0 0,1 3,14V10A1,1 0 0,1 4,9M4,17H20A1,1 0 0,1 21,18V22A1,1 0 0,1 20,23H4A1,1 0 0,1 3,22V18A1,1 0 0,1 4,17M9,5H10V3H9V5M9,13H10V11H9V13M9,21H10V19H9V21M5,3V5H7V3H5M5,11V13H7V11H5M5,19V21H7V19H5Z"/>
+            </symbol>
+        </defs>
+    </svg>
 </head>
 <body>
     <!-- Sticky Navigation -->
@@ -381,20 +480,23 @@
         <header class="hero">
             <div class="profile-section">
                 <div class="profile-image">
-                    <img src="torstenmahr-optimized.jpeg" alt="Profile Picture" id="profile-pic">
+                    <picture>
+                        <source srcset="torstenmahr.webp" type="image/webp">
+                        <img src="torstenmahr-optimized.jpeg" alt="Profile Picture" id="profile-pic" width="150" height="150" loading="eager">
+                    </picture>
                 </div>
                 <h1 class="name">Torsten Mahr</h1>
                 <p class="title">Technology Strategist at Microsoft <br> Enterprise AI Transformation for Financial Services</p>
 
                 <div class="social-links">
                     <a href="https://github.com/trsdn" target="_blank" aria-label="GitHub">
-                        <i class="fab fa-github"></i>
+                        <svg class="icon"><use xlink:href="#icon-github"></use></svg>
                     </a>
                     <a href="https://de.linkedin.com/in/torstenmahr/" target="_blank" aria-label="LinkedIn">
-                        <i class="fab fa-linkedin"></i>
+                        <svg class="icon"><use xlink:href="#icon-linkedin"></use></svg>
                     </a>
                     <a href="https://twitter.com/trsdn" target="_blank" aria-label="Twitter">
-                        <i class="fab fa-twitter"></i>
+                        <svg class="icon"><use xlink:href="#icon-twitter"></use></svg>
                     </a>
                 </div>
             </div>
@@ -424,79 +526,79 @@
                 <h2>Skills & Technologies</h2>
                 <div class="skills-grid">
                     <div class="skill-item">
-                        <i class="fas fa-brain"></i>
+                        <svg class="icon"><use xlink:href="#icon-brain"></use></svg>
                         <span>AI Strategy</span>
                     </div>
                     <div class="skill-item">
-                        <i class="fas fa-cloud"></i>
+                        <svg class="icon"><use xlink:href="#icon-cloud"></use></svg>
                         <span>Cloud Strategy</span>
                     </div>
                     <div class="skill-item">
-                        <i class="fas fa-handshake"></i>
+                        <svg class="icon"><use xlink:href="#icon-handshake"></use></svg>
                         <span>Strategic Sales</span>
                     </div>
                     <div class="skill-item">
-                        <i class="fas fa-microphone"></i>
+                        <svg class="icon"><use xlink:href="#icon-microphone"></use></svg>
                         <span>Public Speaking</span>
                     </div>
                     <div class="skill-item">
-                        <i class="fas fa-rocket"></i>
+                        <svg class="icon"><use xlink:href="#icon-rocket"></use></svg>
                         <span>Digital Transformation</span>
                     </div>
                     <div class="skill-item">
-                        <i class="fas fa-users"></i>
+                        <svg class="icon"><use xlink:href="#icon-users"></use></svg>
                         <span>Executive Advisory</span>
                     </div>
                     <div class="skill-item">
-                        <i class="fab fa-microsoft"></i>
+                        <svg class="icon"><use xlink:href="#icon-microsoft"></use></svg>
                         <span>Microsoft Azure</span>
                     </div>
                     <div class="skill-item">
-                        <i class="fab fa-aws"></i>
+                        <svg class="icon"><use xlink:href="#icon-aws"></use></svg>
                         <span>AWS</span>
                     </div>
                     <div class="skill-item">
-                        <i class="fas fa-shield-alt"></i>
+                        <svg class="icon"><use xlink:href="#icon-shield"></use></svg>
                         <span>Cybersecurity</span>
                     </div>
                     <div class="skill-item">
-                        <i class="fas fa-chart-line"></i>
+                        <svg class="icon"><use xlink:href="#icon-chart-line"></use></svg>
                         <span>Business Development</span>
                     </div>
                     <div class="skill-item">
-                        <i class="fas fa-sitemap"></i>
+                        <svg class="icon"><use xlink:href="#icon-sitemap"></use></svg>
                         <span>Enterprise Architecture</span>
                     </div>
                     <div class="skill-item">
-                        <i class="fas fa-balance-scale"></i>
+                        <svg class="icon"><use xlink:href="#icon-balance-scale"></use></svg>
                         <span>Governance & Compliance</span>
                     </div>
                     <div class="skill-item">
-                        <i class="fas fa-users-cog"></i>
+                        <svg class="icon"><use xlink:href="#icon-users-cog"></use></svg>
                         <span>Agile Leadership</span>
                     </div>
                     <div class="skill-item">
-                        <i class="fas fa-university"></i>
+                        <svg class="icon"><use xlink:href="#icon-university"></use></svg>
                         <span>Financial Services</span>
                     </div>
                     <div class="skill-item">
-                        <i class="fas fa-lightbulb"></i>
+                        <svg class="icon"><use xlink:href="#icon-lightbulb"></use></svg>
                         <span>Innovation Strategy</span>
                     </div>
                     <div class="skill-item">
-                        <i class="fas fa-graduation-cap"></i>
+                        <svg class="icon"><use xlink:href="#icon-graduation-cap"></use></svg>
                         <span>Thought Leadership</span>
                     </div>
                     <div class="skill-item">
-                        <i class="fas fa-puzzle-piece"></i>
+                        <svg class="icon"><use xlink:href="#icon-puzzle-piece"></use></svg>
                         <span>Problem Solving</span>
                     </div>
                     <div class="skill-item">
-                        <i class="fas fa-hands-helping"></i>
+                        <svg class="icon"><use xlink:href="#icon-hands-helping"></use></svg>
                         <span>Team Enablement</span>
                     </div>
                     <div class="skill-item">
-                        <i class="fas fa-globe"></i>
+                        <svg class="icon"><use xlink:href="#icon-globe"></use></svg>
                         <span>Global Collaboration</span>
                     </div>
                 </div>
@@ -768,7 +870,7 @@
                     <div class="testimonial-item">
                         <div class="testimonial-content">
                             <div class="quote-icon">
-                                <i class="fas fa-quote-left"></i>
+                                <svg class="icon"><use xlink:href="#icon-quote-left"></use></svg>
                             </div>
                             <p class="testimonial-text">"Torsten was a genius in this environment. At any time, he asked the right questions, was the driver of strategic topics and starting point for all other team mates for their issues or getting new ideas to solve problems. His view for details are gorgeous (in every kind, business, IT and overall strategic)."</p>
                             <div class="testimonial-author">
@@ -780,7 +882,7 @@
                     <div class="testimonial-item">
                         <div class="testimonial-content">
                             <div class="quote-icon">
-                                <i class="fas fa-quote-left"></i>
+                                <svg class="icon"><use xlink:href="#icon-quote-left"></use></svg>
                             </div>
                             <p class="testimonial-text">"Within a very short time frame (five months), Torsten set up a team that helped more than 100 developers across our organization developing in a compliant and efficient way on AWS. He did a tremendous job, constantly managing some very challenging stakeholders."</p>
                             <div class="testimonial-author">
@@ -792,7 +894,7 @@
                     <div class="testimonial-item">
                         <div class="testimonial-content">
                             <div class="quote-icon">
-                                <i class="fas fa-quote-left"></i>
+                                <svg class="icon"><use xlink:href="#icon-quote-left"></use></svg>
                             </div>
                             <p class="testimonial-text">"You truly impacted the company, our technology & platforms as well as our mindset in the Digital Program and way beyond - maybe more than you think. Many solutions we are taking live in a matter of days and weeks today wouldn't have been possible without your work."</p>
                             <div class="testimonial-author">
@@ -809,7 +911,7 @@
                 <div class="experience-grid">
                     <div class="experience-item">
                         <div class="company-logo">
-                            <i class="fab fa-microsoft"></i>
+                            <svg class="icon"><use xlink:href="#icon-microsoft"></use></svg>
                         </div>
                         <div class="experience-content">
                             <h3>Technology Strategist - Strategic Customer Banking</h3>
@@ -821,7 +923,7 @@
                     </div>
                     <div class="experience-item">
                         <div class="company-logo">
-                            <i class="fab fa-microsoft"></i>
+                            <svg class="icon"><use xlink:href="#icon-microsoft"></use></svg>
                         </div>
                         <div class="experience-content">
                             <h3>Technology Strategist - Financial Services</h3>
@@ -832,7 +934,7 @@
                     </div>
                     <div class="experience-item">
                         <div class="company-logo">
-                            <i class="fas fa-car"></i>
+                            <svg class="icon"><use xlink:href="#icon-car"></use></svg>
                         </div>
                         <div class="experience-content">
                             <h3>Cloud Center of Excellence Lead</h3>
@@ -843,7 +945,7 @@
                     </div>
                     <div class="experience-item">
                         <div class="company-logo">
-                            <i class="fas fa-car"></i>
+                            <svg class="icon"><use xlink:href="#icon-car"></use></svg>
                         </div>
                         <div class="experience-content">
                             <h3>Enabler Tribe Lead - Digital Unit</h3>
@@ -854,7 +956,7 @@
                     </div>
                     <div class="experience-item">
                         <div class="company-logo">
-                            <i class="fas fa-car"></i>
+                            <svg class="icon"><use xlink:href="#icon-car"></use></svg>
                         </div>
                         <div class="experience-content">
                             <h3>Product Owner AWS Cloud Platform - Digital Unit</h3>
@@ -866,7 +968,7 @@
                     </div>
                     <div class="experience-item">
                         <div class="company-logo">
-                            <i class="fas fa-car"></i>
+                            <svg class="icon"><use xlink:href="#icon-car"></use></svg>
                         </div>
                         <div class="experience-content">
                             <h3>Integration Architect</h3>
@@ -878,7 +980,7 @@
                     </div>
                     <div class="experience-item">
                         <div class="company-logo">
-                            <i class="fas fa-cogs"></i>
+                            <svg class="icon"><use xlink:href="#icon-cogs"></use></svg>
                         </div>
                         <div class="experience-content">
                             <h3>IT-Architecture Consultant</h3>
@@ -889,7 +991,7 @@
                     </div>
                     <div class="experience-item">
                         <div class="company-logo">
-                            <i class="fas fa-server"></i>
+                            <svg class="icon"><use xlink:href="#icon-server"></use></svg>
                         </div>
                         <div class="experience-content">
                             <h3>IT Administration</h3>
@@ -906,7 +1008,7 @@
                 <div class="education-grid">
                     <div class="education-item">
                         <div class="education-logo">
-                            <i class="fas fa-graduation-cap"></i>
+                            <svg class="icon"><use xlink:href="#icon-graduation-cap"></use></svg>
                         </div>
                         <div class="education-content">
                             <h3>Diplom, Business Information Systems</h3>
@@ -919,7 +1021,7 @@
                     </div>
                     <div class="education-item">
                         <div class="education-logo">
-                            <i class="fas fa-graduation-cap"></i>
+                            <svg class="icon"><use xlink:href="#icon-graduation-cap"></use></svg>
                         </div>
                         <div class="education-content">
                             <h3>Material Science</h3>
@@ -930,7 +1032,7 @@
                     </div>
                     <div class="education-item">
                         <div class="education-logo">
-                            <i class="fas fa-graduation-cap"></i>
+                            <svg class="icon"><use xlink:href="#icon-graduation-cap"></use></svg>
                         </div>
                         <div class="education-content">
                             <h3>Electrical Engineering</h3>
