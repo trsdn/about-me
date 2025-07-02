@@ -156,9 +156,90 @@
         "potentialAction": {
             "@type": "SearchAction",
             "target": "https://www.aitorsten.com?q={search_term_string}",
-            "query-input": "required name=search_term_string"
         }
     }
+    </script>
+    
+    <!-- Structured data for publications -->
+    <script type="application/ld+json">
+    [
+        {
+            "@context": "https://schema.org",
+            "@type": "ScholarlyArticle",
+            "headline": "Teamwork quality in technology-driven product teams in large-scale agile organizations",
+            "author": [
+                {
+                    "@type": "Person",
+                    "name": "Alexander Poth"
+                },
+                {
+                    "@type": "Person", 
+                    "name": "Mario Kottke"
+                },
+                {
+                    "@type": "Person",
+                    "name": "Torsten Mahr",
+                    "url": "https://www.aitorsten.com"
+                },
+                {
+                    "@type": "Person",
+                    "name": "Andreas Riel"
+                }
+            ],
+            "publisher": {
+                "@type": "Organization",
+                "name": "Wiley",
+                "url": "https://onlinelibrary.wiley.com"
+            },
+            "datePublished": "2021",
+            "url": "https://onlinelibrary.wiley.com/doi/10.1002/smr.2388",
+            "abstract": "Presents the Technical Team Maturity (TTM) approach for autonomous teams in agile organizations, focusing on technology-specific skills and capabilities. Evaluated in enterprise context of Volkswagen AG and Volkswagen Financial Services AG.",
+            "isPartOf": {
+                "@type": "Periodical",
+                "name": "Journal of Software: Evolution and Process"
+            }
+        },
+        {
+            "@context": "https://schema.org",
+            "@type": "ScholarlyArticle", 
+            "headline": "Lean integration of IT security and data privacy governance aspects into product development in agile organizations",
+            "author": [
+                {
+                    "@type": "Person",
+                    "name": "Alexander Poth"
+                },
+                {
+                    "@type": "Person",
+                    "name": "Mario Kottke"
+                },
+                {
+                    "@type": "Person",
+                    "name": "Kerstin Middelhauve"
+                },
+                {
+                    "@type": "Person",
+                    "name": "Torsten Mahr",
+                    "url": "https://www.aitorsten.com"
+                },
+                {
+                    "@type": "Person",
+                    "name": "Andreas Riel"
+                }
+            ],
+            "publisher": {
+                "@type": "Organization",
+                "name": "JUCS",
+                "url": "https://lib.jucs.org"
+            },
+            "datePublished": "2021",
+            "url": "https://lib.jucs.org/article/71770/element/8/139569//",
+            "abstract": "Research on integrating IT security and data privacy governance into agile product development processes, addressing compliance challenges in modern software development organizations.",
+            "isPartOf": {
+                "@type": "Periodical",
+                "name": "Journal of Universal Computer Science"
+            }
+        }
+    ]
     </script>
     
     <link rel="stylesheet" href="styles.css">
@@ -766,28 +847,28 @@
             <section id="publications" class="publications-section">
                 <h2>Research Publications</h2>
                 <div class="publications-grid">
-                    <div class="publication-item">
+                    <div class="publication-item" itemscope itemtype="https://schema.org/ScholarlyArticle">
                         <div class="publication-content">
-                            <h3>Teamwork quality in technology-driven product teams in large-scale agile organizations</h3>
-                            <p class="authors">Alexander Poth, Mario Kottke, <strong>Torsten Mahr</strong>, Andreas Riel</p>
-                            <p class="journal">Journal of Software: Evolution and Process, Wiley</p>
-                            <p class="year">2021</p>
-                            <p class="abstract">Presents the Technical Team Maturity (TTM) approach for autonomous teams in agile organizations, focusing on technology-specific skills and capabilities. Evaluated in enterprise context of Volkswagen AG and Volkswagen Financial Services AG.</p>
+                            <h3 itemprop="headline">Teamwork quality in technology-driven product teams in large-scale agile organizations</h3>
+                            <p class="authors" itemprop="author">Alexander Poth, Mario Kottke, <strong itemprop="author">Torsten Mahr</strong>, Andreas Riel</p>
+                            <p class="journal" itemprop="publisher">Journal of Software: Evolution and Process, Wiley</p>
+                            <p class="year" itemprop="datePublished">2021</p>
+                            <p class="abstract" itemprop="abstract">Presents the Technical Team Maturity (TTM) approach for autonomous teams in agile organizations, focusing on technology-specific skills and capabilities. Evaluated in enterprise context of Volkswagen AG and Volkswagen Financial Services AG.</p>
                             <div class="publication-links">
-                                <a href="https://onlinelibrary.wiley.com/doi/10.1002/smr.2388" target="_blank" class="btn-secondary">Read Paper</a>
+                                <a href="https://onlinelibrary.wiley.com/doi/10.1002/smr.2388" target="_blank" class="btn-secondary" itemprop="url">Read Paper</a>
                                 <span class="btn-primary">Wiley • Peer Reviewed</span>
                             </div>
                         </div>
                     </div>
-                    <div class="publication-item">
+                    <div class="publication-item" itemscope itemtype="https://schema.org/ScholarlyArticle">
                         <div class="publication-content">
-                            <h3>Lean integration of IT security and data privacy governance aspects into product development in agile organizations</h3>
-                            <p class="authors">Alexander Poth, Mario Kottke, Kerstin Middelhauve, <strong>Torsten Mahr</strong>, Andreas Riel</p>
-                            <p class="journal">Journal of Universal Computer Science (JUCS)</p>
-                            <p class="year">2021</p>
-                            <p class="abstract">Research on integrating IT security and data privacy governance into agile product development processes, addressing compliance challenges in modern software development organizations.</p>
+                            <h3 itemprop="headline">Lean integration of IT security and data privacy governance aspects into product development in agile organizations</h3>
+                            <p class="authors" itemprop="author">Alexander Poth, Mario Kottke, Kerstin Middelhauve, <strong itemprop="author">Torsten Mahr</strong>, Andreas Riel</p>
+                            <p class="journal" itemprop="publisher">Journal of Universal Computer Science (JUCS)</p>
+                            <p class="year" itemprop="datePublished">2021</p>
+                            <p class="abstract" itemprop="abstract">Research on integrating IT security and data privacy governance into agile product development processes, addressing compliance challenges in modern software development organizations.</p>
                             <div class="publication-links">
-                                <a href="https://lib.jucs.org/article/71770/element/8/139569//" target="_blank" class="btn-secondary">Read Paper</a>
+                                <a href="https://lib.jucs.org/article/71770/element/8/139569//" target="_blank" class="btn-secondary" itemprop="url">Read Paper</a>
                                 <span class="btn-primary">JUCS • Peer Reviewed</span>
                             </div>
                         </div>
