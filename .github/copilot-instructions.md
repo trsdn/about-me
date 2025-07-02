@@ -1,4 +1,4 @@
-if we make changes on file we make sure to check if other files are affected
+if we make changes on file we make sure to check if other files are affected (e.g. site map, robots.txt, etc.)
 we write proper markdown
 we check on typos and grammar
 we use github mcp
