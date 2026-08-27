@@ -1,0 +1,4 @@
+# Google Search Console verification token. Google mandates the exact file
+# contents (a single `google-site-verification:` line), so it is a plain text
+# file that only carries an .html extension - it is not an HTML document.
+googlebb74aa914e848419.html
