@@ -1,0 +1,8 @@
+# macOS
+.DS_Store
+
+# Local tooling output (linters, browser automation, agent hooks)
+node_modules/
+.playwright-mcp/
+.impeccable/
+release-notes.md

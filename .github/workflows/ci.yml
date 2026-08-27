@@ -1,0 +1,83 @@
+name: CI
+
+on:
+  push:
+    branches: ["**"]
+  pull_request:
+  workflow_dispatch:
+
+permissions:
+  contents: read
+
+concurrency:
+  group: ci-${{ github.ref }}
+  cancel-in-progress: true
+
+jobs:
+  html:
+    name: HTML validation
+    runs-on: ubuntu-latest
+    steps:
+      - name: Check out repository
+        uses: actions/checkout@v7
+
+      - name: Set up Node.js
+        uses: actions/setup-node@v7
+        with:
+          node-version: "22"
+
+      # Rules live in .htmlvalidate.json (recommended + accessibility presets).
+      # .htmlvalidateignore excludes the Google Search Console token, which
+      # carries an .html extension but is a plain text file.
+      - name: Validate HTML
+        run: npx --yes html-validate@9 "**/*.html"
+
+  markdown:
+    name: Markdown lint
+    runs-on: ubuntu-latest
+    steps:
+      - name: Check out repository
+        uses: actions/checkout@v7
+
+      - name: Set up Node.js
+        uses: actions/setup-node@v7
+        with:
+          node-version: "22"
+
+      # Globs and rules come from .markdownlint-cli2.jsonc.
+      - name: Lint markdown
+        run: npx --yes markdownlint-cli2@0.18.1
+
+  site:
+    name: Site consistency
+    runs-on: ubuntu-latest
+    steps:
+      - name: Check out repository
+        uses: actions/checkout@v7
+
+      - name: Set up Node.js
+        uses: actions/setup-node@v7
+        with:
+          node-version: "22"
+
+      # The site has no build step, so the only meaningful JavaScript check is
+      # that the committed file actually parses.
+      - name: Check JavaScript syntax
+        run: node --check script.js
+
+      # Verifies sitemap.xml, robots.txt, site.webmanifest, the canonical URL
+      # and every local asset and in-page anchor agree with index.html.
+      - name: Check site metadata consistency
+        run: python3 scripts/check-site-consistency.py
+
+  release-notes:
+    name: Release notes extractable
+    runs-on: ubuntu-latest
+    steps:
+      - name: Check out repository
+        uses: actions/checkout@v7
+
+      # Guards the release workflow: if the Unreleased section cannot be parsed,
+      # tagging a release would publish empty notes.
+      - name: Verify changelog is parseable
+        run: python3 scripts/extract-release-notes.py Unreleased > /dev/null

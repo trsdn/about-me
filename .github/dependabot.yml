@@ -1,0 +1,19 @@
+version: 2
+
+# This repository is a static site: plain HTML, CSS, and JavaScript with no
+# build step. There is no package.json, requirements.txt, Gemfile, go.mod,
+# Dockerfile, or any other dependency manifest, so GitHub Actions is the only
+# ecosystem Dependabot can meaningfully track here. Add further entries if a
+# package manifest is ever introduced.
+updates:
+  - package-ecosystem: github-actions
+    directory: /
+    schedule:
+      interval: weekly
+      day: monday
+      time: "06:00"
+      timezone: Europe/Berlin
+    commit-message:
+      prefix: ci
+    labels:
+      - dependencies

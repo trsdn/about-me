@@ -1,0 +1,11 @@
+{
+    "root": true,
+    "extends": [
+        "html-validate:recommended",
+        "html-validate:a11y"
+    ],
+    "rules": {
+        "no-trailing-whitespace": "off",
+        "long-title": "off"
+    }
+}

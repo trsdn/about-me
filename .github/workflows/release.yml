@@ -1,0 +1,35 @@
+name: Release
+
+on:
+  push:
+    tags:
+      - "v*"
+
+permissions:
+  contents: write
+
+jobs:
+  release:
+    name: Publish GitHub Release
+    runs-on: ubuntu-latest
+    steps:
+      - name: Check out repository
+        uses: actions/checkout@v7
+
+      # Fails the release if CHANGELOG.md has no section for the tagged
+      # version, rather than publishing a release with empty notes.
+      - name: Extract release notes from CHANGELOG.md
+        run: |
+          python3 scripts/extract-release-notes.py "${GITHUB_REF_NAME}" \
+            > release-notes.md
+          echo "Release notes for ${GITHUB_REF_NAME}:"
+          cat release-notes.md
+
+      - name: Publish GitHub Release
+        env:
+          GH_TOKEN: ${{ github.token }}
+        run: |
+          gh release create "${GITHUB_REF_NAME}" \
+            --title "${GITHUB_REF_NAME}" \
+            --notes-file release-notes.md \
+            --verify-tag
